@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@model IEnumerable<RetourViewModel>
+
+<h2>Liste des emprunts actifs</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom & prénoms</th>
+            <th>Titre du livre</th>
+            <th>Date emprunt</th>
+         <th>Date retour prévue</th> 
+            <th>Date retour </th>
+            <th>Statut</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var retour in Model)
+        {  
+            <tr>
+                <td>@retour.UsagerNom</td>
+                <td>@retour.LivreTitre</td>
+                <td>@retour.DateEmprunt.ToString("yyyy-MM-dd")</td>                
+               
+                <td>@(retour.DatePrevu.ToString("yyyy-MM-dd"))</td>
+
+                @* Si la date de retour est vide, la cellule ne sera pas affichée du tout *@
+                @if (@retour.DateRetour != null && @retour.DateRetour != DateTime.MinValue)
+                {
+                    <td>@retour.DateRetour.ToString("yyyy-MM-dd")</td>
+                }
+                else
+                {
+                    <td></td> @* Cellule vide sans texte *@
+                }
+                <td data-date-prevu="@retour.DatePrevu.ToString("yyyy-MM-ddTHH:mm:ss")"></td>
+                <td>
+                    <a href="@Url.Action("Modifier", "Emprunts", new { id = retour.IDEmprunt })">Modifier</a> |
+                    <a href="@Url.Action("Supprimer", "Emprunts", new { id = retour.IDEmprunt })">Supprimer</a> |
+                    <a href="@Url.Action("Details", "Emprunts", new { id = retour.IDEmprunt })">Details</a> |
+                    <a href="@Url.Action("Ajouter", "Retours", new { empruntId = retour.IDEmprunt })">Retour du livre</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

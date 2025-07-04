@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Retours
+
+@{
+    ViewData["Title"] = "Modifier la Date de Retour";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post" asp-action="Modifier">
+
+    <div class="form-group mb-3">
+        <label asp-for="DateRetour">Date de retour</label>
+        <input asp-for="DateRetour" class="form-control" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+        <span asp-validation-for="DateRetour" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Modifier</button>
+        <a href="@Url.Action("Index", "Emprunts")" class="btn btn-secondary">Retour à la liste des emprunts</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

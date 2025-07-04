@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ReservationViewModel> 
+
+<h2 class="text-center">Gestion des réservations</h2>
+
+<a asp-action="Ajouter" class="btn btn-primary mb-3">Réserver un livre</a>
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Nom & Prénoms</th>
+                <th>Titre du livre</th>
+                <th>Date</th>
+                <th>Date retour prévue</th>
+                <th>Statut</th>
+                <th>livre dispo?</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reservation in Model)
+            {
+                <tr>
+                    <td>@reservation.UsagerNom</td>
+                    <td>@reservation.LivreTitre</td>
+                    <td>@reservation.DateDebut.ToString("yyyy-MM-dd")</td>
+                    <td>@reservation.DatePrevue.ToString("yyyy-MM-dd")</td>
+                    <td data-date-prevu="@reservation.DatePrevue.ToString("yyyy-MM-ddTHH:mm:ss")"></td>
+                    <td>@(reservation.EstDisponible ? "Oui" : "Non")</td>
+                    <td>
+                        <a href="@Url.Action("Modifier", "Reservations", new { id = reservation.IdReservation })">Modifier</a> |
+                        <a href="@Url.Action("EmprunterViaReservation", "Emprunts", new { idReservation = reservation.IdReservation })">Emprunter</a>|
+                        <a href="@Url.Action("ConfirmerAnnulation", "Reservations", new { id = reservation.IdReservation })" class="btn btn-danger btn-sm">Annuler</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

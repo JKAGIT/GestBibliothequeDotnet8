@@ -1,0 +1,36 @@
+﻿@model ReservationViewModel
+
+<h2 class="text-center">Emprunter via Réservation</h2>
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="container">
+    <h3>Informations sur la réservation</h3>
+
+    <div class="form-group">
+        <label for="LivreTitre">Titre du Livre</label>
+        <input class="form-control" id="LivreTitre" value="@Model.LivreTitre" readonly />
+    </div>
+
+    <div class="form-group">
+        <label for="UsagerNom">Nom de l'Usager</label>
+        <input class="form-control" id="UsagerNom" value="@Model.UsagerNom" readonly />
+    </div>
+
+    <div class="form-group">
+        <label for="DateDebut">Date de début</label>
+        <input class="form-control" id="DateDebut" type="date" value="@Model.DateDebut.ToString("yyyy-MM-dd")" />
+    </div>
+
+    <div class="form-group">
+        <label for="DatePrevue">Date retour prévue</label>
+        <input class="form-control" id="DatePrevue" type="date" value="@Model.DatePrevue.ToString("yyyy-MM-dd")" />
+    </div>
+
+    <form asp-controller="Emprunts" asp-action="EmprunterViaReservation" method="post">
+        <input type="hidden" asp-for="IdReservation" />
+        <input type="hidden" asp-for="IdLivre" />
+        <input type="hidden" asp-for="IdUsager" />
+        <input type="hidden" asp-for="DateDebut" />
+       <input type="hidden" asp-for="DatePrevue" /> 
+        <button type="submit" class="btn btn-success">Emprunter</button>
+    </form>
+</div>

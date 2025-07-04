@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Livres
+
+
+<h1>Modifier un Livre</h1>
+
+<form asp-action="Modifier" method="post">   
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label for="Titre">Titre</label>
+        <input type="text" class="form-control" id="Titre" name="Titre" value="@Model.Titre" required />
+    </div>
+    <div class="form-group">
+        <label for="Auteur">Auteur</label>
+        <input type="text" class="form-control" id="Auteur" name="Auteur" value="@Model.Auteur" required />
+    </div>
+    <div class="form-group">
+        <label for="Nombre">Nombre</label>
+        <input type="number" class="form-control" id="Nombre" name="Nombre" value="@Model.Nombre" required />
+    </div>
+    <div class="form-group">
+        <label for="Nombre">Stock</label>
+        <input type="number" class="form-control" id="Stock" name="Stock" value="@Model.Stock" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="IDCategorie">Catégorie</label>
+        <select asp-for="IDCategorie" asp-items="@(ViewBag.Categories)" class="form-control"></select>
+    </div>
+    <a href="@Url.Action("Index", "Livres")" class="btn btn-secondary">Annuler</a>
+    <button type="submit" class="btn btn-primary">Modifier</button>
+</form>

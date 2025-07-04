@@ -1,0 +1,31 @@
+﻿@model ReservationViewModel
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label for="IdLivre">Livre</label>
+        <select asp-for="IdLivre" asp-items="Model.Livres" class="form-control">
+            <option value="">Sélectionnez un livre</option> 
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="IdUsager">Usager</label>
+        <select asp-for="IdUsager" asp-items="Model.Usagers" class="form-control">
+            <option value="">Sélectionnez un usager</option> 
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="DateDebut">Date de début</label>
+        <input asp-for="DateDebut" class="form-control" type="date" />
+    </div>
+
+    <div class="form-group">
+        <label for="DatePrevue">Date de retour prévue</label>
+        <input asp-for="DatePrevue" class="form-control" type="date" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+</form>

@@ -1,0 +1,61 @@
+﻿
+@model UsagerDetailsViewModel
+
+
+<h2>Détails de l'usager</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Informations de l'usager</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <strong>Nom:</strong> @Model.Nom
+            </li>
+            <li class="list-group-item">
+                <strong>Prénoms:</strong> @Model.Prenoms
+            </li>
+            <li class="list-group-item">
+                <strong>Courriel:</strong> @Model.Courriel
+            </li>
+            <li class="list-group-item">
+                <strong>Téléphone:</strong> @Model.Telephone
+            </li>
+        </ul>
+
+        <div class="mt-3">
+            <a href="@Url.Action("Index", "Usagers")" class="btn btn-secondary">Retour à la liste</a>
+            <a href="@Url.Action("Modifier", "Usagers", new { id = Model.UsagerId })" class="btn btn-primary">Modifier</a>
+        </div>
+    </div>
+</div>
+
+<br />
+<h4>Emprunts actifs de cet usager</h4>
+@if (Model.Emprunts != null && Model.Emprunts.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Titre du livre</th>
+                <th>Date d'emprunt</th>
+                <th>Date retour prévue</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emprunt in Model.Emprunts)
+            {
+                <tr>
+                    <td>@emprunt.LivreTitre</td>
+                    <td>@emprunt.DateEmprunt.ToString("yyyy-MM-dd")</td>
+                    <td>@emprunt.DatePrevu.ToString("yyyy-MM-dd")</td>
+                    <td data-date-prevu="@emprunt.DatePrevu.ToString("yyyy-MM-ddTHH:mm:ss")"></td>                   
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Aucun emprunt actif pour cet usager.</p>
+}

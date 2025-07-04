@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ReservationViewModel>
+
+<h2 class="text-center">Gestion des Réservations</h2>
+
+<div class="table-responsive">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Nom & Prénoms</th>
+                <th>Titre du livre</th>
+                <th>Date</th>
+                <th>Date retour prévue</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reservation in Model)
+            {
+                <tr>
+                    <td>@reservation.UsagerNom</td>
+                    <td>@reservation.LivreTitre</td>
+                    <td>@reservation.DateDebut.ToString("yyyy-MM-dd")</td>
+                    <td>@reservation.DatePrevue.ToString("yyyy-MM-dd")</td>
+                    <td>@(reservation.Annuler ? "Annulée" : "Active")</td>
+                    <td>
+                        @if (!reservation.Annuler)
+                        {
+                            <form method="post" asp-action="Annuler" asp-route-idReservation="@reservation.IdReservation">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir annuler cette réservation ?')">Annuler</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Réservation annulée</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

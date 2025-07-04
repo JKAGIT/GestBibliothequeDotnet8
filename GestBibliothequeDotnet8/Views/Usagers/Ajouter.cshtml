@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model GestBibliothequeDotnet8.Models.Usagers
+<h2>Ajouter un nouvel usager</h2>
+
+<form asp-action="Ajouter" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+
+    <div class="form-group">
+        <label asp-for="Nom"></label>
+        <input asp-for="Nom" class="form-control" />
+        <span asp-validation-for="Nom" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Prenoms"></label>
+        <input asp-for="Prenoms" class="form-control" />
+        <span asp-validation-for="Prenoms" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Courriel"></label>
+        <input asp-for="Courriel" type="email" class="form-control" />
+        <span asp-validation-for="Courriel" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Telephone"></label>
+        <input asp-for="Telephone" class="form-control" placeholder="418 111 1234" maxlength="12" />
+        <span asp-validation-for="Telephone" class="text-danger"></span>
+    </div>
+    <a href="@Url.Action("Index", "Usagers")" class="btn btn-secondary">Annuler</a>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+</form>
+

@@ -1,0 +1,31 @@
+﻿
+@model Emprunts
+
+<h1>Modifier un emprunt</h1>
+
+<form asp-action="Modifier" method="post">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label>Usager</label>
+        <select asp-for="IDUsager" asp-items="ViewBag.Usagers"><option value="">Sélectionner l'usager</option></select>
+        <span asp-validation-for="IDUsager" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Livre</label>
+        <select asp-for="IDLivre" asp-items="ViewBag.Livres"><option value="">Sélectionner le livre</option></select>
+        <span asp-validation-for="IDLivre" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateDebut">Date de début</label>
+        <input asp-for="DateDebut" class="form-control" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+        <span asp-validation-for="DateDebut" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateRetourPrevue">Date de début</label>
+        <input asp-for="DateRetourPrevue" class="form-control" type="date" />
+        <span asp-validation-for="DateRetourPrevue" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Modifier</button>
+</form>

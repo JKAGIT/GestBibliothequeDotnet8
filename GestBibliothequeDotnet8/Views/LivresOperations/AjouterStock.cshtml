@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Ajouter du Stock";
+}
+
+<h1>Ajouter du stock</h1>
+
+<form asp-action="AjouterStock" method="post">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label for="livreId">Sélectionnez un livre :</label>
+
+        <input type="text" id="livreRechercher" class="form-control" placeholder="Rechercher un livre..." onkeyup="filtreLivres()">
+
+        <select id="livreId" name="idLivre" class="form-control" required>
+            <option value="">-- Sélectionner un livre --</option>
+            @if (ViewData["Livres"] != null && ViewData["Livres"] is SelectList livres)
+            {
+                @foreach (var livre in livres)
+                {
+                    <option value="@livre.Value">@livre.Text</option>
+                }
+            }
+            else
+            {
+                <option value="">Aucun livre disponible</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Quantité à ajouter :</label>
+        <input type="number" id="quantite" name="quantite" class="form-control" min="1" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+</form>

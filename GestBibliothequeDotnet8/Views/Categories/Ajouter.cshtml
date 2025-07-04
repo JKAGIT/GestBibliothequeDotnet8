@@ -1,0 +1,43 @@
+﻿ @model Categories
+
+<h1>Ajouter une Catégorie</h1>
+
+<form asp-action="Ajouter" method="post">
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <strong>Erreurs :</strong>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+    <div class="form-group">
+        <label asp-for="Code"></label>
+        <input asp-for="Code" class="form-control" />
+        <span asp-validation-for="Code" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Libelle"></label>
+        <input asp-for="Libelle" class="form-control" id="Libelle" oninput="generateCode()" />
+        <span asp-validation-for="Libelle" class="text-danger"></span>
+    </div>
+    <a href="@Url.Action("Index", "Categories")" class="btn btn-secondary">Annuler</a>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+</form>
+
+@section Scripts {    
+    <script>
+        function generateCode() {
+            const inputValue = document.getElementById('Libelle').value.trim();
+            if (inputValue === '') {
+                document.getElementById('Code').value = '';
+                return;
+            }
+
+            const code = inputValue.split(' ')[0].substring(0, 4).toUpperCase();
+            document.getElementById('Code').value = code;
+        }
+    </script>
+}

@@ -1,0 +1,33 @@
+﻿
+@model RetourViewModel
+
+<h2>Retourner un livre</h2>
+
+<form method="post" asp-action="Ajouter">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" name="IDEmprunt" value="@Model.IDEmprunt" />
+
+    <div class="form-group">
+        <label>Emprunteur:</label>
+        <input type="text" class="form-control" value="@Model.UsagerNom" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Titre du livre:</label>
+        <input type="text" class="form-control" value="@Model.LivreTitre" readonly />
+    </div>
+    <div class="form-group">
+        <label for="DateRetour">Date de retour:</label>
+        <input type="date" class="form-control" id="DateRetour" value="@Model.DateRetour.ToString("yyyy-MM-dd")" name="DateRetour" required />
+        <span asp-validation-for="DateRetour" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Retourner le livre</button>
+        <a href="@Url.Action("Index", "Emprunts")" class="btn btn-secondary">Retour à la liste</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

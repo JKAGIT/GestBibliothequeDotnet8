@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Livres>
+
+@{
+    ViewData["Title"] = "Livres en Stock";
+}
+
+<h1>Livres en Stock</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var livre in Model)
+            {
+                <tr>
+                    <td>@livre.Titre</td>
+                    <td>@livre.Auteur</td>
+                    <td>@livre.Stock</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Aucun livre en stock.</p>
+}

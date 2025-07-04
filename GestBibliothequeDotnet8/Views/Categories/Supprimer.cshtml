@@ -1,0 +1,21 @@
+﻿
+@model Categories
+
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<div class="container mt-4">
+    <h2>Supprimer une catégorie</h2>
+
+    <div class="alert alert-warning" role="alert">
+        <strong>Attention!</strong> Êtes-vous sûr de vouloir supprimer la catégorie @Model.Libelle?
+    </div>
+
+
+    <form asp-action="SupprimerConfirmation" method="post">
+        <input type="hidden" asp-for="ID" />
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+        <a href="@Url.Action("Index", "Categories")" class="btn btn-secondary">Annuler</a>
+    </form>
+
+</div> 

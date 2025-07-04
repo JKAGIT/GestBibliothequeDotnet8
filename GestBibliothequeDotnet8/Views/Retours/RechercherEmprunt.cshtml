@@ -1,0 +1,49 @@
+﻿@model IEnumerable<RetourViewModel>
+
+<h2>Rechercher un emprunt</h2>
+
+<form method="get" asp-action="RechercherEmprunt">
+    <div class="form-group">
+        <label for="recherche">Recherche :</label>
+        <input type="text" class="form-control" id="recherche" name="recherche" value="@ViewData["Recherche"]" placeholder="Rechercher par titre de livre ou nom d'usager" />
+    </div>
+    <button type="submit" class="btn btn-primary">Rechercher</button>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <h3>Résultats de recherche :</h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Nom & Prénoms</th>
+                    <th>Titre du livre</th>
+                    <th>Date emprunt</th>
+                    <th>Date retour prévue</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var emprunt in Model)
+                {
+                    <tr>
+                        <td>@emprunt.UsagerNom</td>
+                        <td>@emprunt.LivreTitre</td>
+                        <td>@emprunt.DateEmprunt.ToString("yyyy-MM-dd")</td>
+                        <td>@emprunt.DatePrevu.ToString("yyyy-MM-dd")</td>
+                        <td data-date-prevu="@emprunt.DatePrevu.ToString("yyyy-MM-ddTHH:mm:ss")"></td>
+                        <td>
+                            <a href="@Url.Action("Ajouter", "Retours", new { empruntId = emprunt.IDEmprunt })">Retourner le livre</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>Aucun emprunt trouvé pour votre recherche.</p>
+}

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36221.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestBibliothequeDotnet8", "GestBibliothequeDotnet8\GestBibliothequeDotnet8.csproj", "{81C37EA1-2416-410B-A218-4B1D107C936A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestBibliothequeDotnet8.Tests", "GestBibliothequeDotnet8.Tests\GestBibliothequeDotnet8.Tests.csproj", "{4BF99E98-517C-4BCE-AE80-77BBF8A68919}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81C37EA1-2416-410B-A218-4B1D107C936A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81C37EA1-2416-410B-A218-4B1D107C936A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81C37EA1-2416-410B-A218-4B1D107C936A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81C37EA1-2416-410B-A218-4B1D107C936A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BF99E98-517C-4BCE-AE80-77BBF8A68919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BF99E98-517C-4BCE-AE80-77BBF8A68919}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BF99E98-517C-4BCE-AE80-77BBF8A68919}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BF99E98-517C-4BCE-AE80-77BBF8A68919}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E31AC41-724B-4B1F-AA2F-316C71CE574D}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<Usagers>
+
+<h2>Liste des usagers</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prenoms</th>
+            <th>Courriel</th>
+            <th>Telephone</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usagers in Model)
+        {
+            <tr>
+                <td>@usagers.Nom</td>
+                <td>@usagers.Prenoms</td>
+                <td>@usagers.Courriel</td>
+                <td>@usagers.Telephone</td>
+                <td>
+                    <a href="@Url.Action("Modifier", "Usagers", new { id = usagers.ID })">Modifier</a> |
+                    <a href="@Url.Action("Supprimer", "Usagers", new { id = usagers.ID })">Supprimer</a> |
+                    <a href="@Url.Action("Details", "Usagers", new { id = usagers.ID })">Details</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Ajouter" class="btn btn-primary">Ajouter un usagers</a>

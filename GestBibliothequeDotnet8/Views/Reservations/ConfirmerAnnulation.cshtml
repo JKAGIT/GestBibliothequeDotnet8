@@ -1,0 +1,21 @@
+﻿@model ReservationViewModel
+
+<h2>Confirmer l'annulation de la réservation</h2>
+
+<p>Êtes-vous sûr de vouloir annuler cette réservation ?</p>
+
+<dl class="row">
+    <dt class="col-sm-3">Titre du livre</dt>
+    <dd class="col-sm-9">@Model.LivreTitre</dd>
+
+    <dt class="col-sm-3">Nom de l'usager</dt>
+    <dd class="col-sm-9">@Model.UsagerNom</dd>
+</dl>
+
+<form method="post" asp-controller="Reservations" asp-action="Annuler">
+    <input type="hidden" name="idReservation" value="@Model.IdReservation" />
+    @Html.AntiForgeryToken()
+
+    <button type="submit" class="btn btn-danger">Confirmer l'annulation</button>
+    <a asp-action="Index" class="btn btn-secondary">Retour</a>
+</form>
