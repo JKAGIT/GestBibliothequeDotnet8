@@ -46,7 +46,7 @@ namespace GestBibliothequeDotnet8.Tests
 
             _mockValidationService
                 .Setup(s => s.VerifierExistenceAsync(It.IsAny<Expression<Func<Categories, bool>>>()))
-                .ReturnsAsync(false);
+                .ReturnsAsync(true);
 
             // Act
             await _categoriesService.AddAsync(newCategorie);
