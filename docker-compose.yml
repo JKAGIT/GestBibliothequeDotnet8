@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  gestbiblio-app:
+    image: gestbiblio:latest
+    container_name: gestbiblio-app
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Server=host.docker.internal,1433;Database=GestBibliothequeDB;User Id=sa;Password=MonMotDePasse123!;TrustServerCertificate=true;
+    depends_on:
+      - sqlserver
+    networks:
+      - gestbiblio-network
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: gestbiblio-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=MonMotDePasse123!
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql/data
+    networks:
+      - gestbiblio-network
+
+volumes:
+  sqlserver_data:
+
+networks:
+  gestbiblio-network:
+    driver: bridge
