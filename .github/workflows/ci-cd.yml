@@ -1,0 +1,85 @@
+name: CI/CD Local Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: 🧪 Tests
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
+    
+    - name: Run tests
+      run: dotnet test --no-build --configuration Release --verbosity normal
+    
+    - name: ✅ Tests passed
+      if: success()
+      run: echo "✅ Tous les tests sont passés avec succès!"
+
+  build-docker:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    name: 🐳 Build Docker Image
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build Docker image
+      run: |
+        docker build -t gestbiblio:latest .
+        docker tag gestbiblio:latest gestbiblio:$(date +%Y%m%d-%H%M%S)
+    
+    - name: Save Docker image
+      run: |
+        docker save gestbiblio:latest | gzip > gestbiblio-latest.tar.gz
+    
+    - name: Upload Docker image artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: docker-image
+        path: gestbiblio-latest.tar.gz
+
+  deploy-local:
+    runs-on: self-hosted  # Nécessite un runner sur votre machine
+    needs: build-docker
+    if: github.ref == 'refs/heads/main'
+    name: 🚀 Deploy Local
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Download Docker image
+      uses: actions/download-artifact@v4
+      with:
+        name: docker-image
+    
+    - name: Load Docker image
+      run: |
+        docker load < gestbiblio-latest.tar.gz
+    
+    - name: Deploy to local
+      run: |
+        chmod +x scripts/deploy-local.sh
+        ./scripts/deploy-local.sh
+    
+    - name: Health check
+      run: |
+        chmod +x scripts/health-check.sh
+        ./scripts/health-check.sh
